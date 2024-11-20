@@ -19,8 +19,10 @@ jobs:
             sudo mv tigera-scanner /usr/local/bin/
       - run:
           name: Scan Docker Image Locally
-          command: cd /usr/local/bin/
-          #command: ./tigera-scanner
+          command: |
+          cd /usr/local/bin/
+          ls -a
+          ./tigera-scanner
           #command: ./tigera-scanner scan $IMAGE --apiurl https://z2kj9hab-management.calicocloud.io/bast --token $(buildkite-agent secret get token) --output_file scan-result.json
 
 workflows:
