@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install Tigera Image Scanner
           command: |
-            curl -o tigera-scanner https://path-to-tigera-scanner-cli
+            curl -o tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.20.0-1.0-18/image-assurance-scanner-cli-linux-amd64
             chmod +x tigera-scanner
             sudo mv tigera-scanner /usr/local/bin/
       - run:
