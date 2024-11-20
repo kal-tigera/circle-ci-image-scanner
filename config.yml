@@ -4,7 +4,7 @@ executors:
   local-executor:
     docker:
       - image: circleci/node:16  # Base image with Node.js
-    working_directory: ~/project
+    working_directory: ~/project1
 
 jobs:
   scan:
