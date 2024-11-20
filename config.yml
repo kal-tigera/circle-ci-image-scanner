@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Scan Docker Image Locally
           command: |
-          ssh -o StrictHostKeyChecking=no ubuntu@xxx.xxx.xxx.xxx bash -c ' \
+            ssh -o StrictHostKeyChecking=no ubuntu@xxx.xxx.xxx.xxx bash -c ' \
             cd /usr/local/bin/
             ls -a
             ./tigera-scanner
