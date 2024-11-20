@@ -20,9 +20,10 @@ jobs:
       - run:
           name: Scan Docker Image Locally
           command: |
-          cd /usr/local/bin/
-          ls -a
-          ./tigera-scanner
+          ssh -o StrictHostKeyChecking=no ubuntu@xxx.xxx.xxx.xxx bash -c ' \
+            cd /usr/local/bin/
+            ls -a
+            ./tigera-scanner
           #command: ./tigera-scanner scan $IMAGE --apiurl https://z2kj9hab-management.calicocloud.io/bast --token $(buildkite-agent secret get token) --output_file scan-result.json
 
 workflows:
