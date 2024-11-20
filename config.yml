@@ -3,8 +3,11 @@ version: 2.1
 executors:
   local-executor:
     docker:
-      - image: circleci/node:16  # Base image with Node.js
+      - image: circleci/python:3.9  # Base image with Node.js
     working_directory: ~/project1
+    steps:
+      - setup_remote_docker:
+        version: 20.10.21  # Ensures Docker environment is available
 
 
 
