@@ -6,6 +6,8 @@ executors:
       - image: circleci/node:16  # Base image with Node.js
     working_directory: ~/project1
 
+
+
 jobs:
   scan:
     executor: local-executor
@@ -16,7 +18,11 @@ jobs:
           command: |
             curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.20.0-1.0-18/image-assurance-scanner-cli-linux-amd64
             chmod +x ./tigera-scanner
-            sudo mv tigera-scanner /usr/local/bin/
+            sudo mv tigera-scanner /usr/local/bin
+      - run:
+          name: Pull Image
+          command: |
+            docker pull redis:latest
       - run:
           name: Scan Docker Image Locally
           command: |
