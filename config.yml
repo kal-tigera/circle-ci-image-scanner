@@ -25,17 +25,16 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y docker.io  # Ensure Docker is available
-            curl -LO https://github.com/tigera/cli/releases/latest/download/tigera-scanner-linux-amd64
-            chmod +x tigera-scanner-linux-amd64
-            ./tigera-scanner-linux-amd64 scan --image $IMAGE_NAME
-            cd tigera-scanner-linux-amd64
+            curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.20.0-2.0-9/image-assurance-scanner-cli-linux-amd64
+            chmod +x ./tigera-scanner
             ls -a
+            ./tigera-scanner scan --image $IMAGE_NAME
 
       # Step 3: Scan the image with Tigera Scanner
       - run:
           name: Scan Image with Tigera Scanner
           command: |
-            tigera-scanner-linux-amd64 scan --image $IMAGE_NAME
+            ./tigera-scanner scan --image $IMAGE_NAME
 
 workflows:
   version: 2
