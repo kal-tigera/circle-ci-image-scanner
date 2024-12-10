@@ -21,7 +21,12 @@ jobs:
             sudo apt-get install -y docker.io  # Ensure Docker is available
             curl -LO https://github.com/tigera/cli/releases/latest/download/tigera-scanner-linux-amd64
             chmod +x tigera-scanner-linux-amd64
+            pwd
+            ls -a
             sudo mv tigera-scanner-linux-amd64 /usr/local/bin/tigera-scanner
+            ls -l tigera-scanner-linux-amd64
+            file tigera-scanner-linux-amd64
+            head -n 5 tigera-scanner-linux-amd64
 
       # Step 2: Build the Docker image
       - run:
