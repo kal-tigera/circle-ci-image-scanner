@@ -1,14 +1,13 @@
 version: 2.1
 
 executors:
-  docker-executor:
-    docker:
-      - image: circleci/node:current
-    working_directory: ~/project
+  machine-executor:
+    machine:
+      image: ubuntu-2204:2023.10.2  # Use a machine image with Docker pre-installed
 
 jobs:
   build-and-scan:
-    executor: docker-executor
+    executor: machine-executor
     environment:
       IMAGE_NAME: nginx:latest  # IMAGE NAME HERE
     steps:
