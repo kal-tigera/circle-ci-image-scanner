@@ -6,7 +6,7 @@ executors:
       image: ubuntu-2004:2023.10.1  # Use a machine image with Docker pre-installed
 
 jobs:
-  build-and-scan:
+  pull-and-scan:
     executor: machine-executor
     environment:
       IMAGE_NAME: nginx:latest  # IMAGE NAME HERE
@@ -25,9 +25,9 @@ jobs:
 
       # Step 2: Build the Docker image
       - run:
-          name: Build Docker Image
+          name: Pull Docker Image
           command: |
-            docker build -t $IMAGE_NAME .
+            docker pull $IMAGE_NAME
 
       # Step 3: Scan the image with Tigera Scanner
       - run:
@@ -39,4 +39,4 @@ workflows:
   version: 2
   build-and-scan-workflow:
     jobs:
-      - build-and-scan
+      - pull-and-scan
