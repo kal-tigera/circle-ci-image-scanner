@@ -1,32 +1,43 @@
 version: 2.1
 
 executors:
-  local-executor:
+  docker-executor:
     docker:
-      - image: circleci/python:3.9  # Base image
+      - image: circleci/node:14.17  
     working_directory: ~/project
 
 jobs:
-  scan:
-    executor: local-executor
+  build-and-scan:
+    executor: docker-executor
+    environment:
+      IMAGE_NAME: nginx:latest  # IMAGE NAME HERE
     steps:
+      - checkout
+
+      # Step 1: Set up the environment
       - run:
-          name: Install Tigera Image Scanner
+          name: Install Dependencies
           command: |
-            curl -o tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.20.0-1.0-18/image-assurance-scanner-cli-linux-amd64
-            chmod +x tigera-scanner
-            sudo mv tigera-scanner /usr/local/bin/
+            sudo apt-get update
+            sudo apt-get install -y docker.io  # Ensure Docker is available
+            curl -LO https://github.com/tigera/cli/releases/latest/download/tigera-scanner-linux-amd64
+            chmod +x tigera-scanner-linux-amd64
+            sudo mv tigera-scanner-linux-amd64 /usr/local/bin/tigera-scanner
+
+      # Step 2: Build the Docker image
       - run:
-          name: Pull Existing Docker Image
+          name: Build Docker Image
           command: |
-            docker pull nginx:latest
+            docker build -t $IMAGE_NAME .
+
+      # Step 3: Scan the image with Tigera Scanner
       - run:
-          name: Scan Docker Image
+          name: Scan Image with Tigera Scanner
           command: |
-            tigera-image-scanner
+            tigera-scanner scan --image $IMAGE_NAME
 
 workflows:
   version: 2
-  scan-image:
+  build-and-scan-workflow:
     jobs:
-      - scan
+      - build-and-scan
