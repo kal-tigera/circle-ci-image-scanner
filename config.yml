@@ -42,13 +42,13 @@ jobs:
             cat scan-result.json
             echo "Summary of vulnerabilities found below:"
             echo "Critical"
-            jq '.imagesToSummary["$IMAGE_NAME"].vulnerabilities.critical' scan-result.json
+            jq '.imagesToSummary["redis:latest"].vulnerabilities.critical' scan-result.json
             echo "Sum"
-            jq '.imagesToSummary["$IMAGE_NAME"].vulnerabilities.sum' scan-result.json
+            jq '.imagesToSummary["redis:latest"].vulnerabilities.sum' scan-result.json
             echo "Unknown"
-            jq '.imagesToSummary["$IMAGE_NAME"].vulnerabilities.unknown' scan-result.json
+            jq '.imagesToSummary["redis:latest"].vulnerabilities.unknown' scan-result.json
             
-            if [ "$(jq '.imagesToSummary["$IMAGE_NAME"].vulnerabilities.critical' scan-result.json)" -gt 0 ]; then
+            if [ "$(jq '.imagesToSummary["redis:latest"].vulnerabilities.critical' scan-result.json)" -gt 0 ]; then
               echo "Critical vulnerabilities found!"
               echo "Image failed the scan!"
               exit 1
