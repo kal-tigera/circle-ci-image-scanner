@@ -38,6 +38,8 @@ jobs:
       - run:
           name: Analyze Scan Results
           command: |
+            ls -a
+            cat scan-result.json
             echo "Summary of vulnerabilities found below:"
             echo "Critical"
             jq '.imagesToSummary["$IMAGE_NAME"].vulnerabilities.critical' scan-result.json
