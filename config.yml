@@ -27,14 +27,14 @@ jobs:
             sudo apt-get install -y docker.io  # Ensure Docker is available
             curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.20.0-2.0-9/image-assurance-scanner-cli-linux-amd64
             chmod +x ./tigera-scanner
+            ./tigera-scanner version
             ls -a
-            ./tigera-scanner scan --image $IMAGE_NAME
 
       # Step 3: Scan the image with Tigera Scanner
       - run:
           name: Scan Image with Tigera Scanner
           command: |
-            ./tigera-scanner scan --image $IMAGE_NAME
+            ./tigera-scanner scan $IMAGE_NAME --apiurl https://z2kj9hab-management.calicocloud.io/bast --token eyJhbGciOiJSUzI1NiIsImtpZCI6IktrUHJMWXpkaTYwZ3pmZzVNbWZPQ0YyMnBuaWZrX2l4UWZ3UXdWU1RISGcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0aWdlcmEtbWFuYWdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ0aWdlcmEtaW1hZ2UtYXNzdXJhbmNlLXNjYW5uZXItY2xpLXRva2VuLW5vbi1leHBpcnlpbmciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoidGlnZXJhLWltYWdlLWFzc3VyYW5jZS1zY2FubmVyLWNsaS1hcGktYWNjZXNzIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNDBhOWRlZTYtMDI4NS00Y2YyLWJkMzgtZmZiZmRjM2FjMDE3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnRpZ2VyYS1tYW5hZ2VyOnRpZ2VyYS1pbWFnZS1hc3N1cmFuY2Utc2Nhbm5lci1jbGktYXBpLWFjY2VzcyJ9.nYvFiQmzJHqVM4kIt4WZvB8nN8JtlBuN6HU8_7AhHlJPvjmA357OqYdxS1D3h26DqH5DfOEHNqPRGxAqYZsw0r44tpLIFVnRfjzYrMa5qK7lWNzcQK8PudNqP1bx8OM3z1dGLCpZ8N17INOhcq5WBtK9Iqb1IppiTc0m9MLZxD1gP-UmeyafReuALrlhblMmMWXsIUUdbK8ndXcBXXfDgZNT8fDitsvuSwqGO55-HogFe_9_FCZyOa3OhylX9DHMCVrBrWt3il5uFyVfyBnuVR25Ngt-9MryvOqMV_nE5zj2Ptxv1qY1vVFEomjsgM3KaybgH-oVhfa8zYvxSFh7cw//u52p4lx3 --output_file scan-result.json
 
 workflows:
   version: 2
