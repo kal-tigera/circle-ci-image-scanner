@@ -9,7 +9,7 @@ jobs:
   pull-and-scan:
     executor: machine-executor
     environment:
-      IMAGE_NAME: alpine:latest  # IMAGE NAME HERE
+      IMAGE_NAME: redis:latest  # IMAGE NAME HERE
     steps:
       - checkout
       
