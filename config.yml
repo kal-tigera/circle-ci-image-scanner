@@ -3,7 +3,7 @@ version: 2.1
 executors:
   machine-executor:
     machine:
-      image: ubuntu-2204:2023.10.2  # Use a machine image with Docker pre-installed
+      image: ubuntu-2004:2023.10.1  # Use a machine image with Docker pre-installed
 
 jobs:
   build-and-scan:
