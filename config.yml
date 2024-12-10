@@ -12,6 +12,12 @@ jobs:
       IMAGE_NAME: nginx:latest  # IMAGE NAME HERE
     steps:
       - checkout
+      
+      # Step 1: Build the Docker image
+      - run:
+          name: Pull Docker Image
+          command: |
+            docker pull $IMAGE_NAME
 
       # Step 1: Set up the environment
       - run:
@@ -21,24 +27,15 @@ jobs:
             sudo apt-get install -y docker.io  # Ensure Docker is available
             curl -LO https://github.com/tigera/cli/releases/latest/download/tigera-scanner-linux-amd64
             chmod +x tigera-scanner-linux-amd64
-            pwd
+            ./tigera-scanner-linux-amd64 scan --image $IMAGE_NAME
+            cd tigera-scanner-linux-amd64
             ls -a
-            sudo mv tigera-scanner-linux-amd64 /usr/local/bin/tigera-scanner
-            ls -l tigera-scanner-linux-amd64
-            file tigera-scanner-linux-amd64
-            head -n 5 tigera-scanner-linux-amd64
-
-      # Step 2: Build the Docker image
-      - run:
-          name: Pull Docker Image
-          command: |
-            docker pull $IMAGE_NAME
 
       # Step 3: Scan the image with Tigera Scanner
       - run:
           name: Scan Image with Tigera Scanner
           command: |
-            /usr/local/bin/tigera-scanner scan --image $IMAGE_NAME
+            tigera-scanner-linux-amd64 scan --image $IMAGE_NAME
 
 workflows:
   version: 2
