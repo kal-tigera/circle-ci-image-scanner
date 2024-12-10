@@ -33,13 +33,8 @@ jobs:
       - run:
           name: Scan Image with Tigera Scanner
           command: |
-            pwd
-            ls -a
-            cd ..
-            ls -a
-            cd ..
-            la -a
-            #tigera-scanner scan --image $IMAGE_NAME
+            cd /usr/local/bin/tigera-scanner
+            tigera-scanner scan --image $IMAGE_NAME
 
 workflows:
   version: 2
